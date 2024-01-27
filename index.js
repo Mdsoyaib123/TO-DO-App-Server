@@ -31,32 +31,48 @@ async function run() {
       const result = await taskCollection.find().toArray();
       res.send(result);
     });
-    app.get('/taskById/:id',async(req,res)=>{
-        const id = req.params.id 
-        const query = {_id :new ObjectId(id)}
-        const result  = await taskCollection.findOne(query)
-        res.send(result)
-    })
+    app.get("/taskById/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await taskCollection.findOne(query);
+      res.send(result);
+    });
     app.post("/tasks", async (req, res) => {
       const taskData = req.body;
       const result = await taskCollection.insertOne(taskData);
       res.send(result);
     });
+    app.patch("/isCompleted/:id", async (req, res) => {
+      const id = req.params.id;
+      const data = req.body 
+      console.log(data);
+      const query = { _id: new ObjectId(id) };
 
-    app.patch('/taskEdit/:id', async(req,res)=>{
-        const id = req.params.id 
-        const taskData = req.body 
-        const query = {_id:new ObjectId(id)}
+      if(data.agreement === false){
         const updateDoc={
-            $set:{
-                title:taskData.title,
-                des:taskData.des,
-                isPrority:taskData.isPrority
-            }
+          $set:{
+            isCompleted : 'Completed'
+          }
         }
         const result = await taskCollection.updateOne(query,updateDoc)
         res.send(result)
-    })
+      }
+    });
+    app.patch("/taskEdit/:id", async (req, res) => {
+      const id = req.params.id;
+      
+      const taskData = req.body;
+      const query = { _id: new ObjectId(id) };
+      const updateDoc = {
+        $set: {
+          title: taskData.title,
+          des: taskData.des,
+          isPrority: taskData.isPrority,
+        },
+      };
+      const result = await taskCollection.updateOne(query, updateDoc);
+      res.send(result);
+    });
     app.delete("/task/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
