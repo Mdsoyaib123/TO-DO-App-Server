@@ -1,6 +1,12 @@
 # TO-DO-APP server
 
+## Technologies
 
+- Node.js
+- Express.js
+- MongoDB
+
+  
 ## How to use this TO-DO-App
  
 #### 1. First , you have to connect your Database with this project.
