@@ -10,7 +10,7 @@
 
 
 ## API
-#### Home :  https://to-do-app-server-teal.vercel.app
+#### Base url :  https://to-do-app-server-teal.vercel.app
 
 #### All Tasks (GET) :  https://to-do-app-server-teal.vercel.app/tasks
 
