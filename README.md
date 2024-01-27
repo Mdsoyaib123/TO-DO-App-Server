@@ -7,11 +7,12 @@
 - MongoDB
 
   
-## How to use this TO-DO-App
- 
-#### 1. First , you have to connect your Database with this project.
-#### 2. Then you have to type "npm install" this command in terminal .
-#### 3. Then Run the Project
+## Installation
+
+1. Clone this repository.
+2. Connect the project with your Database
+3. Run `npm` to install project dependencies.
+4. Start the development server with `nodemon index.js`.
 
 
 
