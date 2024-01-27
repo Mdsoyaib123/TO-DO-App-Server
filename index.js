@@ -25,23 +25,34 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
 
+
+    // taskCollection 
     const taskCollection = client.db("TO-DO-App").collection("tasks");
 
+
+
+    // get all task 
     app.get("/tasks", async (req, res) => {
       const result = await taskCollection.find().toArray();
       res.send(result);
     });
+
+    // get task by id 
     app.get("/taskById/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const result = await taskCollection.findOne(query);
       res.send(result);
     });
+
+    // post task in Database 
     app.post("/tasks", async (req, res) => {
       const taskData = req.body;
       const result = await taskCollection.insertOne(taskData);
       res.send(result);
     });
+
+    // update mark as completed
     app.patch("/isCompleted/:id", async (req, res) => {
       const id = req.params.id;
       const data = req.body 
@@ -58,6 +69,8 @@ async function run() {
         res.send(result)
       }
     });
+
+    // update task by id 
     app.patch("/taskEdit/:id", async (req, res) => {
       const id = req.params.id;
       
@@ -73,6 +86,8 @@ async function run() {
       const result = await taskCollection.updateOne(query, updateDoc);
       res.send(result);
     });
+
+    // Delete task by id 
     app.delete("/task/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
@@ -93,7 +108,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Server is running... ");
 });
 
 app.listen(port, () => {
